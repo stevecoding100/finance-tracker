@@ -80,6 +80,37 @@ const authController = {
             res.status(401).json({ error: "Invalid or expired token" });
         }
     },
+    updateUser: async (req, res) => {
+        const { userId } = req.params;
+        const { name, email, password } = req.body;
+        try {
+            // Validate input (example: ensure email is valid)
+            if (!name && !email && !password) {
+                return res.status(400).json({ message: "No fields to update" });
+            }
+            const updates = {};
+            if (name) updates.name = name;
+            if (email) updates.email = email;
+            if (password) updates.password = password;
+
+            // Call the user model to update the user
+            const updatedUser = await userModel.updateUser(userId, updates);
+
+            if (!updatedUser) {
+                return res.status(404).json({ message: "User not found" });
+            }
+
+            res.status(200).json({
+                message: "User updated successfully",
+                user: updatedUser,
+            });
+        } catch (error) {
+            console.error("Error updating user:", error);
+            res.status(500).json({
+                message: "Server error while updating user",
+            });
+        }
+    },
 };
 
 module.exports = authController;
