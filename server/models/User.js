@@ -95,15 +95,6 @@ const userModel = {
             throw error;
         }
     },
-    // Validate user password
-    validatePassword: async (plainPassword, hashedPassword) => {
-        try {
-            return await bcrypt.compare(plainPassword, hashedPassword);
-        } catch (error) {
-            console.error("Error validating password: ", error);
-            throw error;
-        }
-    },
 };
 
 module.exports = userModel;
