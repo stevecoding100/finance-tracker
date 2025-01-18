@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt");
 const userModel = {
     getUserById: async (userId) => {
         try {
-            const SQL = `SELECT * FROM users WHERE id = $1`;
+            const SQL = `SELECT id, name, email FROM users WHERE id = $1`;
             const { rows } = await client.query(SQL, [userId]);
             if (rows.length === 0) {
                 throw new Error("User not found");
@@ -40,7 +40,6 @@ const userModel = {
             throw error;
         }
     },
-
     // Update user details
     updateUser: async (userId, updatedFields) => {
         try {
@@ -88,11 +87,8 @@ const userModel = {
     // Get user by email
     getUserByEmail: async (email) => {
         try {
-            const SQL = `SELECT * FROM users WHERE email = $1`;
+            const SQL = `SELECT email FROM users WHERE email = $1`;
             const { rows } = await client.query(SQL, [email]);
-            if (rows.length === 0) {
-                throw new Error("User not found");
-            }
             return rows[0];
         } catch (error) {
             console.error("Error fetching user by email: ", error);

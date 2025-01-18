@@ -4,6 +4,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
+const userRoutes = require("./routes/authRoutes");
 
 dotenv.config();
 
@@ -20,7 +21,8 @@ app.use(
     })
 );
 
-// Basic Route
+// Mount Routes
+app.use("/auth", userRoutes);
 app.get("/", (req, res) => {
     res.send("Personal Finance Tracker API is running!");
 });

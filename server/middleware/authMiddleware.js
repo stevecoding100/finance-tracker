@@ -8,6 +8,7 @@ const authMiddleware = {
         try {
             // Fetch the user by email
             const SQL = `SELECT * FROM users WHERE email = $1`;
+
             const { rows } = await client.query(SQL, [email]);
             if (rows.length === 0) {
                 throw new Error("Invalid email or password");
@@ -17,7 +18,7 @@ const authMiddleware = {
             // Verify the password
             const isMatch = await bcrypt.compare(password, user.password);
             if (!isMatch) {
-                throw new Error("Invalid email or password");
+                throw new Error("Invalid password");
             }
 
             // Generate a JWT token
@@ -49,10 +50,21 @@ const authMiddleware = {
             if (response.rows.length === 0) {
                 throw new Error("User not found");
             }
+
             // Return the user
             return response.rows[0];
         } catch (error) {
-            const err = new Error("Invalid token");
+            if (error.name === "TokenExpiredError") {
+                const err = new Error("Token has expired");
+                err.status = 401;
+                throw err;
+            }
+            if (error.name === "JsonWebTokenError") {
+                const err = new Error("Invalid token");
+                err.status = 401;
+                throw err;
+            }
+            const err = new Error("Authentication error");
             err.status = 401;
             throw err;
         }
