@@ -42,7 +42,7 @@ const goalModel = {
 
         const SQL = `
         UPDATE goals
-        SET ${fields}, updated_at = NOW()
+        SET ${fields}, created_at = NOW()
         WHERE id = $1
         RETURNING *
         `;

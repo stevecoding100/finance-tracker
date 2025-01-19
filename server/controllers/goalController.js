@@ -119,7 +119,6 @@ const goalController = {
 
             res.status(200).json({
                 message: "Goal deleted successfully",
-                goal: deletedGoal,
             });
         } catch (error) {
             console.error("Error deleting goal:", error.message);
