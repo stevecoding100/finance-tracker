@@ -5,6 +5,7 @@ const helmet = require("helmet");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const userRoutes = require("./routes/authRoutes");
+const goalRoutes = require("./routes/goalRoutes");
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ app.use(
 
 // Mount Routes
 app.use("/auth", userRoutes);
+app.use("/goal", goalRoutes);
 app.get("/", (req, res) => {
     res.send("Personal Finance Tracker API is running!");
 });

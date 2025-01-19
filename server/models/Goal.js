@@ -2,14 +2,13 @@ const { client } = require("../database/db");
 
 const goalModel = {
     //Create a new goal
-
-    createGoal: async (userId, title, description = "", status = "Pending") => {
+    createGoal: async (userId, title, targetAmount, savedAmount, deadline) => {
         const SQL = ` 
-        INSERT INTO goals (user_id, title, description, status, created_at, updated_at)
-        VALUES ($1, $2, $3, $4, NOW(), NOW())
+        INSERT INTO goals (user_id, title, target_amount, saved_amount, deadline, created_at)
+        VALUES ($1, $2, $3, $4, $5, NOW())
         RETURNING *;
         `;
-        const values = [userId, title, description, status];
+        const values = [userId, title, targetAmount, savedAmount, deadline];
         const { rows } = await client.query(SQL, values);
         return rows[0];
     },

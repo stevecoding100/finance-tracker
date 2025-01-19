@@ -44,7 +44,7 @@ const createTables = async () => {
     CREATE TABLE goals (
         id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
         user_id UUID REFERENCES users(id) ON DELETE CASCADE,
-        name VARCHAR(255) NOT NULL,
+        title VARCHAR(255) NOT NULL,
         target_amount DECIMAL(10, 2) NOT NULL,
         saved_amount DECIMAL(10, 2) DEFAULT 0,
         deadline DATE,
