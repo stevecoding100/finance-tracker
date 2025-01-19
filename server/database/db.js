@@ -22,18 +22,12 @@ const createTables = async () => {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
  
-    -- Categories table
-    CREATE TABLE categories (
-        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-        name VARCHAR(255) NOT NULL,
-        user_id UUID REFERENCES users(id) ON DELETE CASCADE
-    );
 
     -- Transactions table
     CREATE TABLE transactions (
         id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
         user_id UUID REFERENCES users(id) ON DELETE CASCADE,
-        category_id UUID REFERENCES categories(id) ON DELETE CASCADE,
+        category VARCHAR(255) NOT NULL,
         type VARCHAR(50) CHECK (type IN ('income', 'expense')) NOT NULL,
         amount DECIMAL(10, 2) NOT NULL,
         description TEXT,

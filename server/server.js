@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const userRoutes = require("./routes/authRoutes");
 const goalRoutes = require("./routes/goalRoutes");
+const transactionRoutes = require("./routes/transactionRoutes");
 
 dotenv.config();
 
@@ -25,6 +26,8 @@ app.use(
 // Mount Routes
 app.use("/auth", userRoutes);
 app.use("/goal", goalRoutes);
+app.use("/transaction", transactionRoutes);
+
 app.get("/", (req, res) => {
     res.send("Personal Finance Tracker API is running!");
 });
