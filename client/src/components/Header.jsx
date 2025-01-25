@@ -1,5 +1,5 @@
 import { useAuth } from "../auth/authContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import logo from "../assets/spendsmart-logo.png";
 
@@ -30,14 +30,18 @@ const Header = () => {
                         <Button onClick={handleLogout}>Logout</Button>
                     </>
                 ) : (
-                    <>
-                        <Button onClick={() => navigate("/login")}>
-                            Login
-                        </Button>
-                        <Button onClick={() => navigate("/register")}>
-                            Sign Up
-                        </Button>
-                    </>
+                    <div className="flex gap-3 items-center">
+                        <Link to="/register">
+                            <Button variant="outline" className="rounded-full">
+                                Sign Up
+                            </Button>
+                        </Link>
+                        <Link to="/login">
+                            <Button className="rounded-full  bg-blue-800">
+                                Login
+                            </Button>
+                        </Link>
+                    </div>
                 )}
             </div>
         </div>

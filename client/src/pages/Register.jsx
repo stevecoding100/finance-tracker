@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { registerUser } from "../services/api";
 import { useNavigate } from "react-router-dom";
+import abstractImage from "../assets/abstract-bg-image.jpg";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -53,72 +54,94 @@ const Register = () => {
     };
 
     return (
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Name</FormLabel>
-                            <FormControl>
-                                <Input
-                                    placeholder="Enter your name"
-                                    {...field}
-                                />
-                            </FormControl>
-                            <FormDescription>
-                                This is your public display name.
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
+        <div className="flex h-screen">
+            {/* Left side with image */}
+            <div
+                className="hidden md:flex flex-1 bg-cover bg-center"
+                style={{ backgroundImage: `url(${abstractImage})` }}
+            ></div>
 
-                <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Email</FormLabel>
-                            <FormControl>
-                                <Input
-                                    placeholder="Enter your email"
-                                    {...field}
-                                />
-                            </FormControl>
-                            <FormDescription>
-                                {`We'll never share your email.`}
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
+            {/* Right side with form */}
+            <div className="flex flex-1 items-center bg-slate-50 justify-center p-8">
+                <div className="max-w-md w-full">
+                    <h2 className="text-4xl font-bold text-center text-gray-800 dark:text-white mb-6">
+                        Register
+                    </h2>
+                    <p className="text-center text-gray-500 dark:text-gray-400 mb-8">
+                        Create your account
+                    </p>
+                    <Form {...form}>
+                        <form
+                            onSubmit={form.handleSubmit(onSubmit)}
+                            className="space-y-6"
+                        >
+                            <FormField
+                                control={form.control}
+                                name="name"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Name</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                placeholder="Enter your name"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormDescription>
+                                            This is your public display name.
+                                        </FormDescription>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
 
-                <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Password</FormLabel>
-                            <FormControl>
-                                <Input
-                                    type="password"
-                                    placeholder="Enter your password"
-                                    {...field}
-                                />
-                            </FormControl>
-                            <FormDescription>
-                                Choose a strong password.
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
+                            <FormField
+                                control={form.control}
+                                name="email"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Email</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                placeholder="Enter your email"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormDescription>
+                                            {`We'll never share your email.`}
+                                        </FormDescription>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
 
-                <Button type="submit">Register</Button>
-            </form>
-        </Form>
+                            <FormField
+                                control={form.control}
+                                name="password"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Password</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                type="password"
+                                                placeholder="Enter your password"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormDescription>
+                                            Choose a strong password.
+                                        </FormDescription>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+
+                            <Button type="submit">Register</Button>
+                        </form>
+                    </Form>
+                </div>
+            </div>
+        </div>
     );
 };
 
