@@ -2,6 +2,7 @@ import { useAuth } from "../auth/authContext";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import logo from "../assets/spendsmart-logo.png";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Header = () => {
     const { user, logout } = useAuth();
@@ -25,10 +26,22 @@ const Header = () => {
 
             <div>
                 {user ? (
-                    <>
+                    <div className="flex justify-between items-center">
                         {/* <span className="mr-4">Welcome, {user.user.name}</span> */}
-                        <Button onClick={handleLogout}>Logout</Button>
-                    </>
+                        <Avatar>
+                            <AvatarImage
+                                src="https://github.com/shadcn.png"
+                                alt="@shadcn"
+                            />
+                            <AvatarFallback>SD</AvatarFallback>
+                        </Avatar>
+                        <Button
+                            onClick={handleLogout}
+                            className="ml-4 bg-purple-800"
+                        >
+                            Logout
+                        </Button>
+                    </div>
                 ) : (
                     <div className="flex gap-3 items-center">
                         <Link to="/register">
