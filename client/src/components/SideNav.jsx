@@ -22,30 +22,30 @@ const SideNav = () => {
             id: 2,
             name: "Incomes",
             icon: CircleDollarSign,
-            path: "/incomes",
+            path: "/dashboard/incomes",
         },
         {
             id: 3,
             name: "Budgets",
             icon: PiggyBank,
-            path: "/budgets",
+            path: "/dashboard/budgets",
         },
         {
             id: 4,
             name: "Expenses",
             icon: LayoutGrid,
-            path: "/expenses",
+            path: "/dashboard/expenses",
         },
         {
             id: 5,
             name: "Settings",
             icon: Settings,
-            path: "/settings",
+            path: "/dashboard/settings",
         },
     ];
 
     return (
-        <div className="h-screen p-5 border shadow-sm z-30">
+        <div className="h-screen p-5 border shadow-sm w-[300px]">
             <div className="mt-5">
                 {menuList.map((menu, index) => (
                     <Link to={menu.path} key={index}>
