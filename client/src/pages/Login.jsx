@@ -3,7 +3,7 @@ import { useAuth } from "../auth/authContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { loginUser } from "../services/api";
+import { useUserApi } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import abstractImage from "../assets/abstract-bg-image.jpg";
 import { Button } from "@/components/ui/button";
@@ -26,6 +26,7 @@ const formSchema = z.object({
 });
 
 const Login = () => {
+    const { loginUser } = useUserApi();
     const { login } = useAuth();
     const navigate = useNavigate();
 
@@ -43,7 +44,7 @@ const Login = () => {
         try {
             const response = await loginUser(data);
             login(response.data);
-            navigate("/dashboard");
+            navigate("/dashboard/home");
         } catch (error) {
             console.error("Error logging in:", error.response.data);
         }

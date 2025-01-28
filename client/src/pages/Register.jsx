@@ -3,7 +3,7 @@ import { useAuth } from "../auth/authContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { registerUser } from "../services/api";
+import { useUserApi } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import abstractImage from "../assets/abstract-bg-image.jpg";
 
@@ -29,7 +29,8 @@ const formSchema = z.object({
 });
 
 const Register = () => {
-    const { user, login } = useAuth();
+    const { registerUser } = useUserApi();
+    const { login } = useAuth();
     const navigate = useNavigate();
 
     // Initialize form

@@ -10,6 +10,7 @@ import Budgets from "./pages/Budgets";
 import Incomes from "./pages/Incomes";
 import Expenses from "./pages/Expenses";
 import Settings from "./pages/Settings";
+import DasboardHome from "./pages/DasboardHome";
 
 function App() {
     return (
@@ -29,6 +30,7 @@ function App() {
                             </ProtectedRoute>
                         }
                     >
+                        <Route path="home" element={<DasboardHome />} />
                         <Route path="budgets" element={<Budgets />} />
                         <Route path="incomes" element={<Incomes />} />
                         <Route path="expenses" element={<Expenses />} />

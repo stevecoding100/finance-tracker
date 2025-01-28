@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from "react";
-import {
-    createGoal,
-    getAllGoals,
-    getGoalById,
-    updateGoal,
-    deleteGoal,
-} from "../services/api";
-import { useAuth } from "../auth/authContext";
+import { useGoalApi } from "../services/api";
 
 const Budgets = () => {
-    const { user } = useAuth();
+    const { createGoal, getAllGoals, getGoalById, updateGoal, deleteGoal } =
+        useGoalApi();
+
     const [goals, setGoals] = useState([]);
-    const userId = user.user.id;
+
     useEffect(() => {
         const fetchGoals = async () => {
             try {
-                const response = await getAllGoals(userId);
+                const response = await getAllGoals();
                 setGoals(response.data);
             } catch (error) {
                 console.error("Error fetching goals:", error);
@@ -23,14 +18,16 @@ const Budgets = () => {
         };
 
         fetchGoals();
-    }, [userId]);
+    }, []);
 
     return (
         <div>
-            <h1>Budgets</h1>
-            <ul>
+            <h1 className="text-2xl font-bold">Budgets</h1>
+            <ul className="mt-4">
                 {goals.map((goal) => (
-                    <li key={goal.id}>{goal.name}</li>
+                    <li key={goal.id} className="text-xl ">
+                        {goal.title}
+                    </li>
                 ))}
             </ul>
         </div>

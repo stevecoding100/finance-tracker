@@ -5,9 +5,8 @@ import {
     Settings,
     CircleDollarSign,
 } from "lucide-react";
-import logo from "../assets/spendsmart-logo.png";
+
 import { Link, useLocation } from "react-router-dom";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const SideNav = () => {
     const location = useLocation();
@@ -16,7 +15,7 @@ const SideNav = () => {
             id: 1,
             name: "Dashboard",
             icon: LayoutGrid,
-            path: "/dashboard",
+            path: "/dashboard/home",
         },
         {
             id: 2,
@@ -47,12 +46,13 @@ const SideNav = () => {
     return (
         <div className="h-screen p-5 border shadow-sm w-[300px]">
             <div className="mt-5">
-                {menuList.map((menu, index) => (
-                    <Link to={menu.path} key={index}>
+                {menuList.map((menu) => (
+                    <Link to={menu.path} key={menu.id}>
                         <h2
-                            className={`flex gap-2 items-center text-gray-500 font-medium mb-2 p-4 cursor-pointer rounded-full hover:text-primary hover:bg-blue-100 ${
-                                location.pathname == menu.path &&
-                                "text-blue-800 bg-blue-100"
+                            className={`flex gap-2 items-center font-medium mb-2 p-4 cursor-pointer rounded-full hover:text-primary hover:bg-blue-100 hover:text-blue-800 ${
+                                location.pathname == menu.path
+                                    ? "text-blue-800 bg-blue-100"
+                                    : "text-gray-500"
                             }`}
                         >
                             <menu.icon />

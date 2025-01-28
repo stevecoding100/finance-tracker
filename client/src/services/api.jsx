@@ -1,40 +1,62 @@
 import axios from "axios";
+import { useAuth } from "../auth/authContext";
 
 const api = axios.create({
     baseURL: "http://localhost:3000",
 });
 
 // User routes
-export const registerUser = (data) => api.post("/auth/user/register", data);
-export const loginUser = (data) => api.post("/auth/user/login", data);
-export const updateUserProfile = (userId) =>
-    api.put(`/auth/user/updateuser/${userId}`);
-export const getProfile = (token) =>
-    api.get("/auth/user/profile", {
-        headers: { Authorization: `Bearer ${token}` },
-    });
+export const useUserApi = () => {
+    const { user } = useAuth();
+    const userId = user?.user?.id;
+    const token = user?.token;
+
+    const registerUser = (data) => api.post("/auth/user/register", data);
+    const loginUser = (data) => api.post("/auth/user/login", data);
+    const updateUserProfile = (data) =>
+        api.put(`/auth/user/updateuser/${userId}`, data);
+    const getProfile = () =>
+        api.get("/auth/user/profile", {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+
+    return { registerUser, loginUser, updateUserProfile, getProfile };
+};
 
 // Goal/Budget Routes
-export const createGoal = (data) => api.post("/goal/create", data);
-export const getAllGoals = (userId) => api.get(`/goal/allgoals/${userId}`);
-export const getGoalById = (goalId) => api.get(`/goal/${goalId}`);
-export const updateGoal = (goalId, data) =>
-    api.put(`/goal/update/${goalId}`, data);
-export const deleteGoal = (goalId) =>
-    api.delete(`/goal/delete/${goalId}`, goalId);
+export const useGoalApi = () => {
+    const { user } = useAuth();
+    const userId = user?.user?.id;
 
-// Transactions / Icomes / Expenses  Routes
-export const createTransaction = (data) =>
-    api.post("/transaction/create", data);
+    const createGoal = (data) => api.post("/goal/create", data);
+    const getAllGoals = () => api.get(`/goal/allgoals/${userId}`);
+    const getGoalById = (goalId) => api.get(`/goal/${goalId}`);
+    const updateGoal = (goalId, data) =>
+        api.put(`/goal/update/${goalId}`, data);
+    const deleteGoal = (goalId) => api.delete(`/goal/delete/${goalId}`);
 
-export const getAllTransactions = (userId) =>
-    api.get(`/transaction/all/${userId}`);
+    return { createGoal, getAllGoals, getGoalById, updateGoal, deleteGoal };
+};
 
-export const getTransactionById = (transactionId) =>
-    api.get(`/transaction/${transactionId}`);
+// Transactions / Incomes / Expenses Routes
+export const useTransactionApi = () => {
+    const { user } = useAuth();
+    const userId = user?.user?.id;
 
-export const updateTransactionById = (transactionId) =>
-    api.put(`/transaction/update/${transactionId}`);
+    const createTransaction = (data) => api.post("/transaction/create", data);
+    const getAllTransactions = () => api.get(`/transaction/all/${userId}`);
+    const getTransactionById = (transactionId) =>
+        api.get(`/transaction/${transactionId}`);
+    const updateTransactionById = (transactionId, data) =>
+        api.put(`/transaction/update/${transactionId}`, data);
+    const deleteTransactionById = (transactionId) =>
+        api.delete(`/transaction/delete/${transactionId}`);
 
-export const deleteTransactionById = (transactionId) =>
-    api.delete(`/transaction/delete/${transactionId}`);
+    return {
+        createTransaction,
+        getAllTransactions,
+        getTransactionById,
+        updateTransactionById,
+        deleteTransactionById,
+    };
+};
