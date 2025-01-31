@@ -51,28 +51,7 @@ const SideNav = () => {
     };
 
     return (
-        // <div className="h-screen p-5 border shadow-sm w-full sm:w-[300px] md:w-[350px] lg:w-[300px] xl:w-[350px] transition-all duration-300">
-        //     <div className="mt-5">
-        //         {menuList.map((menu) => (
-        //             <Link to={menu.path} key={menu.id}>
-        //                 <h2
-        //                     className={`flex gap-2 items-center font-medium mb-2 p-4 cursor-pointer rounded-full hover:text-primary hover:bg-blue-100 hover:text-blue-800 ${
-        //                         location.pathname == menu.path
-        //                             ? "text-blue-800 bg-blue-100"
-        //                             : "text-gray-500"
-        //                     }`}
-        //                 >
-        //                     <menu.icon className="h-5 w-5" />
-        //                     <span className="hidden sm:inline">
-        //                         {menu.name}
-        //                     </span>
-        //                 </h2>
-        //             </Link>
-        //         ))}
-        //     </div>
-        // </div>
-
-        <div className="relative">
+        <div className="relative h-screen">
             {/* Mobile Menu Button */}
             <button
                 onClick={toggleMobileMenu}

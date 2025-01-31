@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useGoalApi } from "../services/api";
-
+import BudgetItem from "../components/budget/BudgetItem";
+import CreateBudget from "../components/budget/CreateBudget";
+import BudgetList from "../components/budget/BudgetList";
 const Budgets = () => {
     const { createGoal, getAllGoals, getGoalById, updateGoal, deleteGoal } =
         useGoalApi();
@@ -21,14 +23,10 @@ const Budgets = () => {
     }, []);
 
     return (
-        <div>
-            <h1 className="text-2xl font-bold">Budgets</h1>
+        <div className="p-10">
+            <h1 className="text-2xl font-bold">My Budgets</h1>
             <ul className="mt-4">
-                {goals.map((goal) => (
-                    <li key={goal.id} className="text-xl ">
-                        {goal.title}
-                    </li>
-                ))}
+                <BudgetList />
             </ul>
         </div>
     );

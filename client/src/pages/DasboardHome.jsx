@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useUserApi, useGoalApi, useTransactionApi } from "../services/api";
 
 import CardInfo from "../components/CardInfo";
-import BudgetItem from "../components/BudgetItem";
+import BudgetItem from "../components/budget/BudgetItem";
 import BarchartDashboard from "../components/BarchartDashboard";
 import ExpenseListTable from "../components/ExpenseListTable";
+import CreateBudget from "../components/budget/CreateBudget";
 
 const DasboardHome = () => {
     const [userProfile, setUserProfile] = useState([]);
@@ -72,7 +73,6 @@ const DasboardHome = () => {
                     <h2 className="font-bold text-xl md:text-2xl">
                         Latest Budgets
                     </h2>
-
                     {budgetList?.length > 0
                         ? budgetList.map((budget, index) => (
                               <BudgetItem budget={budget} key={index} />
