@@ -18,6 +18,7 @@ export const useUserApi = () => {
     const getProfile = () =>
         api.get("/auth/user/profile", {
             headers: { Authorization: `Bearer ${token}` },
+            userId,
         });
 
     return { registerUser, loginUser, updateUserProfile, getProfile };

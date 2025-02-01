@@ -11,6 +11,7 @@ import Incomes from "./pages/Incomes";
 import Expenses from "./pages/Expenses";
 import Settings from "./pages/Settings";
 import DasboardHome from "./pages/DasboardHome";
+import BudgetDetail from "./components/budget/BudgetDetail";
 
 function App() {
     return (
@@ -21,7 +22,6 @@ function App() {
                     <Route path="/" element={<HomePage />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login />} />
-
                     <Route
                         path="/dashboard/*"
                         element={
@@ -32,6 +32,7 @@ function App() {
                     >
                         <Route path="home" element={<DasboardHome />} />
                         <Route path="budgets" element={<Budgets />} />
+                        <Route path="budgets/:id" element={<BudgetDetail />} />
                         <Route path="incomes" element={<Incomes />} />
                         <Route path="expenses" element={<Expenses />} />
                         <Route path="settings" element={<Settings />} />
