@@ -12,6 +12,7 @@ import Expenses from "./pages/Expenses";
 import Settings from "./pages/Settings";
 import DasboardHome from "./pages/DasboardHome";
 import BudgetDetail from "./components/budget/BudgetDetail";
+import IncomeDetail from "./components/Incomes/IncomeDetail";
 
 function App() {
     return (
@@ -34,6 +35,7 @@ function App() {
                         <Route path="budgets" element={<Budgets />} />
                         <Route path="budgets/:id" element={<BudgetDetail />} />
                         <Route path="incomes" element={<Incomes />} />
+                        <Route path="incomes/:id" element={<IncomeDetail />} />
                         <Route path="expenses" element={<Expenses />} />
                         <Route path="settings" element={<Settings />} />
                     </Route>

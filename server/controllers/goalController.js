@@ -4,7 +4,7 @@ const goalController = {
     // Create a new goal
     createGoal: async (req, res) => {
         try {
-            const { userId, title, targetAmount, savedAmount, deadline } =
+            const { userId, emoji, title, targetAmount, savedAmount } =
                 req.body;
 
             // Validate required fields
@@ -17,10 +17,10 @@ const goalController = {
             // Create a new goal
             const newGoal = await goalModel.createGoal(
                 userId,
+                emoji,
                 title,
                 targetAmount,
-                savedAmount,
-                deadline
+                savedAmount
             );
 
             res.status(201).json({

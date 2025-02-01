@@ -2,40 +2,42 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useGoalApi } from "../../services/api";
+import { useTransactionApi } from "../../services/api";
 
-const BudgetDetail = () => {
+const IncomeDetail = () => {
     const { id } = useParams();
-    const { getGoalById, updateGoal, deleteGoal } = useGoalApi();
-    const [budget, setBudget] = useState(null);
+    const { getTransactionById, updateTransactionById, deleteTransactionById } =
+        useTransactionApi();
+    const [income, setIncome] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [formData, setFormData] = useState({
-        emoji: "",
-        title: "",
-        saved_amount: "",
-        target_amount: "",
-        deadline: "",
+        amount: "",
+        category: "",
+        description: "",
     });
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchBudget = async () => {
+        const fetchIncomes = async () => {
             try {
-                const response = await getGoalById(id);
-                setBudget(response.data);
+                const response = await getTransactionById(id);
+                const transaction = response.data.transaction;
+                setIncome(transaction);
                 setFormData({
-                    title: response.data.title,
-                    saved_amount: response.data.saved_amount,
-                    target_amount: response.data.target_amount,
+                    amount: transaction.amount,
+                    type: "income",
+                    category: transaction.category,
+                    description: transaction.description,
                 });
+                console.log(formData);
                 setIsLoading(false);
             } catch (error) {
                 console.error("Error fetching budget:", error);
             }
         };
 
-        fetchBudget();
+        fetchIncomes();
     }, [id]);
 
     const handleChange = (e) => {
@@ -49,8 +51,8 @@ const BudgetDetail = () => {
     const handleUpdate = async (e) => {
         e.preventDefault();
         try {
-            await updateGoal(id, formData);
-            navigate("/dashboard/budgets");
+            await updateTransactionById(id, formData);
+            navigate("/dashboard/incomes");
         } catch (error) {
             console.error("Error updating budget:", error);
         }
@@ -59,8 +61,8 @@ const BudgetDetail = () => {
     const handleDelete = async () => {
         if (window.confirm("Are you sure you want to delete this budget?")) {
             try {
-                await deleteGoal(id);
-                navigate("/dashboard/budgets");
+                await deleteTransactionById(id);
+                navigate("/dashboard/incomes");
             } catch (error) {
                 console.error("Error deleting budget:", error);
             }
@@ -73,39 +75,33 @@ const BudgetDetail = () => {
 
     return (
         <div>
-            <h1 className="text-2xl font-bold p-10">Update Budget</h1>
+            <h1 className="text-2xl font-bold p-10">Update Income</h1>
             <form onSubmit={handleUpdate}>
                 <div className="mt-2">
-                    <h2 className="text-black font-medium my-1">Budget Name</h2>
+                    <h2 className="text-black font-medium my-1">Amount</h2>
                     <Input
-                        name="title"
-                        value={formData.title}
+                        name="amount"
+                        value={formData.amount}
                         onChange={handleChange}
                         required
                     />
                 </div>
                 <div className="mt-2">
-                    <h2 className="text-black font-medium my-1">
-                        Saved Amount (As of today)
-                    </h2>
+                    <h2 className="text-black font-medium my-1">Categoty</h2>
                     <Input
-                        type="number"
-                        name="saved_amount"
-                        value={formData.saved_amount}
+                        name="category"
+                        value={formData.category}
                         onChange={handleChange}
                         required
                     />
                 </div>
                 <div className="mt-2">
-                    <h2 className="text-black font-medium my-1">
-                        Budget Target Amount
-                    </h2>
-                    <Input
-                        type="number"
-                        name="target_amount"
-                        value={formData.target_amount}
+                    <h2 className="text-black font-medium my-1">Description</h2>
+                    <textarea
+                        className="w-[80%] h-[150px]"
+                        name="description"
+                        value={formData.description}
                         onChange={handleChange}
-                        required
                     />
                 </div>
                 <div className="mt-4">
@@ -123,4 +119,4 @@ const BudgetDetail = () => {
     );
 };
 
-export default BudgetDetail;
+export default IncomeDetail;

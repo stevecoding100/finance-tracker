@@ -1,23 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const BudgetItem = ({ budget, index, deleteGoal }) => {
+const BudgetItem = ({ budget, index }) => {
     const { id, emoji, saved_amount, target_amount, title } = budget;
-    const [goal, setGoals] = useState(budget);
 
     const calculateProgressPerc = () => {
         const perc = (saved_amount / target_amount) * 100;
         return perc > 100 ? 100 : perc.toFixed(2);
     };
 
-    const handleDelete = async (goalId) => {
-        try {
-            await deleteGoal(goalId);
-            goal.filter((goal) => goal.id !== goalId);
-        } catch (error) {
-            console.error("Error deleting goal:", error);
-        }
-    };
     return (
         <Link to={`/dashboard/budgets/${id}`}>
             <div

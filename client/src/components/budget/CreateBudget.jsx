@@ -29,6 +29,7 @@ function CreateBudget({ createGoal, getAllGoals, setBudgetList }) {
         const fetchProfile = async () => {
             try {
                 const response = await getProfile();
+                console.log(response.data.user.id);
                 setUserId(response.data.user.id);
             } catch (error) {
                 console.error("Error fetching profile:", error);
