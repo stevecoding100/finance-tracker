@@ -43,7 +43,7 @@ const BarchartDashboard = ({ transactions }) => {
         ); // Get top 2 categories by amount
 
     return (
-        <div className="border rounded-2xl p-5">
+        <div className="border rounded-2xl p-5 w-auto">
             <h2 className="font-bold text-lg">Activity</h2>
             <ResponsiveContainer width={"80%"} height={300}>
                 <BarChart

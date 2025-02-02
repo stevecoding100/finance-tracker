@@ -8,22 +8,22 @@ const ExpenseListTable = ({ transactions, handleDelete }) => {
     return (
         <div className="mt-6]">
             <h2 className="font-bold text-lg">Latest Expenses</h2>
-            <div className="grid grid-cols-4 w-[550px] rounded-tl-xl rounded-tr-xl bg-slate-200 p-2 mt-3">
-                <h2 className="font-bold">Name</h2>
-                <h2 className="font-bold">Amount</h2>
-                <h2 className="font-bold">Date</h2>
-                <h2 className="font-bold">Action</h2>
+            <div className="grid grid-cols-4 w-auto rounded-tl-xl rounded-tr-xl bg-slate-200 p-2 mt-3">
+                <h2 className="font-bold text-sm md:text-lg">Name</h2>
+                <h2 className="font-bold text-sm md:text-lg">Amount</h2>
+                <h2 className="font-bold text-sm md:text-lg">Date</h2>
+                <h2 className="font-bold text-sm md:text-lg">Action</h2>
             </div>
             {filteredExpenses.map((expense, index) => (
                 <div
-                    className="grid grid-cols-4 w-[550px] bg-slate-50 rounded-bl-xl rounded-br-xl p-2"
+                    className="grid grid-cols-4 w-auto bg-slate-50 rounded-bl-xl rounded-br-xl p-2"
                     key={index}
                 >
-                    <h2 className="text-slate-800 font-semibold">
+                    <h2 className="text-slate-800 font-semibold text-xs md:text-lg">
                         {expense.category}
                     </h2>
-                    <h2>${expense.amount}</h2>
-                    <h2>
+                    <h2 className="text-xs md:text-lg">${expense.amount}</h2>
+                    <h2 className="text-xs md:text-lg">
                         {new Date(expense.created_at).toLocaleDateString(
                             "en-US",
                             {
@@ -35,7 +35,7 @@ const ExpenseListTable = ({ transactions, handleDelete }) => {
                     </h2>
                     <button
                         onClick={() => handleDelete(expense.id)}
-                        className="text-red-500 cursor-pointer"
+                        className="text-red-500 cursor-pointer text-xs md:text-lg"
                     >
                         Delete
                     </button>
