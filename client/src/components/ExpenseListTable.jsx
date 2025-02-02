@@ -6,9 +6,9 @@ const ExpenseListTable = ({ transactions, handleDelete }) => {
     );
 
     return (
-        <div className="mt-3">
+        <div className="mt-6]">
             <h2 className="font-bold text-lg">Latest Expenses</h2>
-            <div className="grid grid-cols-4 rounded-tl-xl rounded-tr-xl bg-slate-200 p-2 mt-3">
+            <div className="grid grid-cols-4 w-[550px] rounded-tl-xl rounded-tr-xl bg-slate-200 p-2 mt-3">
                 <h2 className="font-bold">Name</h2>
                 <h2 className="font-bold">Amount</h2>
                 <h2 className="font-bold">Date</h2>
@@ -16,11 +16,11 @@ const ExpenseListTable = ({ transactions, handleDelete }) => {
             </div>
             {filteredExpenses.map((expense, index) => (
                 <div
-                    className="grid grid-cols-4 bg-slate-50 rounded-bl-xl rounded-br-xl p-2"
+                    className="grid grid-cols-4 w-[550px] bg-slate-50 rounded-bl-xl rounded-br-xl p-2"
                     key={index}
                 >
                     <h2 className="text-slate-800 font-semibold">
-                        {expense.category.toUpperCase()}
+                        {expense.category}
                     </h2>
                     <h2>${expense.amount}</h2>
                     <h2>

@@ -27,7 +27,7 @@ const IncomeItem = ({ transactions }) => {
                             {"💰"}
                         </h2>
                         <div>
-                            <h2 className="font-bold uppercase">{category}</h2>
+                            <h2 className="font-bold">{category}</h2>
                             <h2 className="text-sm text-gray-500">{date}</h2>
                         </div>
                     </div>
