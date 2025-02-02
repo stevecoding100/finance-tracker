@@ -1,6 +1,6 @@
 import React from "react";
 
-const ExpenseListTable = ({ transactions }) => {
+const ExpenseListTable = ({ transactions, handleDelete }) => {
     const filteredExpenses = transactions.filter(
         (transaction) => transaction.type === "expense"
     );
@@ -33,12 +33,12 @@ const ExpenseListTable = ({ transactions }) => {
                             }
                         )}
                     </h2>
-                    <h2
-                        // onClick={() => deleteExpense(expenses)}
+                    <button
+                        onClick={() => handleDelete(expense.id)}
                         className="text-red-500 cursor-pointer"
                     >
                         Delete
-                    </h2>
+                    </button>
                     {/* <h2>
           <Trash
             className="text-red-500 cursor-pointer"

@@ -5,7 +5,6 @@ import CardInfo from "../components/CardInfo";
 import BudgetItem from "../components/budget/BudgetItem";
 import BarchartDashboard from "../components/BarchartDashboard";
 import ExpenseListTable from "../components/ExpenseListTable";
-import CreateBudget from "../components/budget/CreateBudget";
 
 const DasboardHome = () => {
     const [userProfile, setUserProfile] = useState([]);
@@ -14,7 +13,7 @@ const DasboardHome = () => {
 
     const { getProfile } = useUserApi();
     const { getAllGoals } = useGoalApi();
-    const { getAllTransactions } = useTransactionApi();
+    const { getAllTransactions, deleteTransactionById } = useTransactionApi();
 
     useEffect(() => {
         const fetchProfile = async () => {
@@ -52,6 +51,24 @@ const DasboardHome = () => {
         };
         fetchTransactions();
     }, []);
+
+    const handleDelete = async (id) => {
+        try {
+            const response = await deleteTransactionById(id);
+
+            if (response.status === 200) {
+                setTransactions((prevTransactions) =>
+                    prevTransactions.filter(
+                        (transaction) => transaction.id !== id
+                    )
+                );
+            } else {
+                console.error("Failed to delete the transaction.");
+            }
+        } catch (error) {
+            console.error("Error deleting transaction:", error);
+        }
+    };
     return (
         <div className="p-8">
             <h1 className="font-bold text-4xl">Hi, {userProfile.name}!</h1>
@@ -59,14 +76,17 @@ const DasboardHome = () => {
                 Here's what happening with yout money. Let's manage your
                 expenses.
             </p>
-            <CardInfo />
+            <CardInfo budgetList={budgetList} transactions={transactions} />
             <div className="grid grid-cols-1 lg:grid-cols-3 mt-6 gap-5">
                 <div className="lg:col-span-2">
                     <BarchartDashboard
                         transactions={transactions}
                         key={transactions.id}
                     />
-                    <ExpenseListTable transactions={transactions} />
+                    <ExpenseListTable
+                        transactions={transactions}
+                        handleDelete={handleDelete}
+                    />
                 </div>
 
                 <div className="grid gap-5 ">

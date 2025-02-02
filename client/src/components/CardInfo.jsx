@@ -1,65 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { useGoalApi, useTransactionApi } from "../services/api";
+
 import { PiggyBank, ReceiptText, Wallet, CircleDollarSign } from "lucide-react";
 import formatNumber from "../utils/formatNumber";
 
-const CardInfo = () => {
-    const { getAllGoals } = useGoalApi();
-    const { getAllTransactions } = useTransactionApi();
+const CardInfo = ({ transactions, budgetList }) => {
+    const totalBudget = budgetList.reduce(
+        (accumulator, goal) => accumulator + parseFloat(goal.saved_amount),
+        0
+    );
 
-    const [goals, setGoals] = useState([]);
-    const [totalBudget, setTotalBudget] = useState(0);
-    const [totalSpent, setTotalSpent] = useState(0);
-    const [totalIncome, setTotalIncome] = useState(0);
+    const totalSpent = transactions
+        .filter((transaction) => transaction.type === "expense")
+        .reduce(
+            (accumulator, transaction) =>
+                accumulator + parseFloat(transaction.amount),
+            0
+        );
 
-    useEffect(() => {
-        const fetchGoals = async () => {
-            try {
-                const response = await getAllGoals();
-                const goalsData = response.data;
-                setGoals(goalsData);
-
-                // Calculate the total saved_amount
-                const totalSaved = goalsData.reduce((accumulator, goal) => {
-                    return accumulator + parseFloat(goal.saved_amount);
-                }, 0);
-                setTotalBudget(totalSaved);
-            } catch (error) {
-                console.error("Error fetching goals:", error);
-            }
-        };
-
-        fetchGoals();
-    }, []);
-
-    useEffect(() => {
-        const fetchTransactions = async () => {
-            try {
-                const response = await getAllTransactions();
-                const transactionData = response.data.transactions;
-
-                // Calculate total for expenses
-                const totalSpent = transactionData
-                    .filter((transaction) => transaction.type === "expense")
-                    .reduce((accumulator, transaction) => {
-                        return accumulator + parseFloat(transaction.amount);
-                    }, 0);
-                setTotalSpent(totalSpent);
-
-                // Calculate total for income
-                const totalIncome = transactionData
-                    .filter((transaction) => transaction.type === "income")
-                    .reduce((accumulator, transaction) => {
-                        return accumulator + parseFloat(transaction.amount);
-                    }, 0);
-                setTotalIncome(totalIncome);
-            } catch (error) {
-                console.error("Error fetching transactions:", error);
-            }
-        };
-        fetchTransactions();
-    }, []);
-
+    const totalIncome = transactions
+        .filter((transaction) => transaction.type === "income")
+        .reduce(
+            (accumulator, transaction) =>
+                accumulator + parseFloat(transaction.amount),
+            0
+        );
     return (
         <div>
             {/* TotalIncome */}
@@ -103,7 +67,9 @@ const CardInfo = () => {
                 <div className="p-7 border rounded-2xl flex items-center justify-between">
                     <div>
                         <h2 className="text-sm">No. of Budget</h2>
-                        <h2 className="font-bold text-2xl">{goals?.length}</h2>
+                        <h2 className="font-bold text-2xl">
+                            {budgetList?.length}
+                        </h2>
                     </div>
                     <Wallet className="bg-blue-800 p-3 h-12 w-12 rounded-full text-white" />
                 </div>

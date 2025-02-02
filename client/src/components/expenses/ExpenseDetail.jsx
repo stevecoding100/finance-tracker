@@ -52,7 +52,7 @@ const ExpenseDetail = () => {
         e.preventDefault();
         try {
             await updateTransactionById(id, formData);
-            navigate("/dashboard/incomes");
+            navigate("/dashboard/expenses");
         } catch (error) {
             console.error("Error updating budget:", error);
         }
@@ -62,7 +62,7 @@ const ExpenseDetail = () => {
         if (window.confirm("Are you sure you want to delete this budget?")) {
             try {
                 await deleteTransactionById(id);
-                navigate("/dashboard/incomes");
+                navigate("/dashboard/expenses");
             } catch (error) {
                 console.error("Error deleting budget:", error);
             }
