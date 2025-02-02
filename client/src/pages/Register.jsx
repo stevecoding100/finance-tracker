@@ -48,7 +48,7 @@ const Register = () => {
         try {
             const response = await registerUser(data);
             login(response.data);
-            navigate("/dashboard");
+            navigate("/dashboard/home");
         } catch (error) {
             console.error("Error registering user:", error.response.data);
         }
