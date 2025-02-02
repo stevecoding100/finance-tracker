@@ -1,5 +1,6 @@
 import React from "react";
 import { ContainerScroll } from "./ui/container-scroll-animation";
+import SpendSmart from "../assets/spendsmart.png";
 
 const Hero = () => {
     return (
@@ -18,8 +19,8 @@ const Hero = () => {
                         </>
                     }
                 >
-                    <image
-                        src={`/dashboard.png`}
+                    <img
+                        src={SpendSmart}
                         alt="hero"
                         height={720}
                         width={1400}
