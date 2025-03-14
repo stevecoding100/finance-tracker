@@ -1,4 +1,3 @@
-import React from "react";
 import { ContainerScroll } from "./ui/container-scroll-animation";
 import SpendSmart from "../assets/spendsmart.png";
 
@@ -22,8 +21,8 @@ const Hero = () => {
                     <img
                         src={SpendSmart}
                         alt="hero"
-                        height={720}
                         width={1400}
+                        height={720}
                         className="mx-auto rounded-2xl object-cover h-full object-left-top"
                         draggable={false}
                     />

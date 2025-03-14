@@ -4,6 +4,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
+const compression = require("compression");
 const userRoutes = require("./routes/authRoutes");
 const goalRoutes = require("./routes/goalRoutes");
 const transactionRoutes = require("./routes/transactionRoutes");
@@ -11,6 +12,12 @@ const transactionRoutes = require("./routes/transactionRoutes");
 dotenv.config();
 
 const app = express();
+
+//✅ Why?
+// Automatically compresses JS, HTML, CSS, and API responses.
+// Reduces file sizes by up to 80%.
+app.use(compression()); // Enables Gzip/Brotli
+app.use(express.static("build")); // Serve static files
 
 // Middleware
 app.use(helmet());
