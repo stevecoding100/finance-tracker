@@ -3,8 +3,6 @@
 
 
 **🚀 Features**
-User authentication with JWT sessions
-
 Expense and income tracking
 
 Interactive charts and analytics using Recharts
@@ -60,31 +58,30 @@ Development Tools: nodemon
 HTTP Client (internal): axios
 
 
-
 **📦 Installation**
-git clone https://github.com/your-username/finance-tracker.git
-cd finance-tracker
+- git clone https://github.com/your-username/finance-tracker.git
+- cd finance-tracker
 
 **Install frontend dependencies**
-cd client
-npm install
+- cd client
+- npm install
 
 **Install backend dependencies**
-cd ../server
-npm install
+- cd ../server
+- npm install
 
 **🔐 Environment Variables**
 Create a .env file in the /server directory:
-PORT=5000
-DATABASE_URL=your_postgres_url
-JWT_SECRET=your_jwt_secret
+- PORT=5000
+- DATABASE_URL=your_postgres_url
+- JWT_SECRET=your_jwt_secret
 
 **🧪 Running the App**
-cd client
-npm run dev
+- cd client
+- npm run dev
 
-cd server
-npm run dev
+- cd server
+- npm run dev
 
 
 
