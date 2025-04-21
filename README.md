@@ -19,6 +19,7 @@ Emoji support for transaction tags
 
 Smooth animations and polished user experience
 
+
 **🖼️ Frontend**
 Built with React and TailwindCSS for a fast, interactive user experience.
 
@@ -58,16 +59,7 @@ Development Tools: nodemon
 
 HTTP Client (internal): axios
 
-**🗂️ Project Structure**
 
-finance-tracker/
-├── client/              # Frontend React app
-│   └── src/
-├── server/              # Backend Express app
-│   └── routes/
-│   └── controllers/
-│   └── db/
-│   └── middleware/
 
 **📦 Installation**
 git clone https://github.com/your-username/finance-tracker.git
